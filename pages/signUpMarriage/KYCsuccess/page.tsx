@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react";
 import UploadImage from "../../../components/Upload_Image";
 import { useUpload } from '../../../contexts/UploadContext';
 import Cnft from "../../../components/Cnft";
+import { AuroraBackground } from "../../../components/ui/aurora-background";
 
 function calculateAge(dob: string) {
   const birthDate = new Date(dob);
@@ -115,8 +116,8 @@ export default function KYCsuccessPage() {
 
   const metadata = uploadStatus.includes('IPFS Hash - ') ? {
     name: `${data?.bride?.full_name}_and_${data?.groom?.full_name}`,
-    symbol: 'KYCNFT',
-    description: 'NFT representing the KYC verification details for a marriage.',
+    symbol: 'MARRIAGE',
+    description: 'NFT representing the contract details for a marriage.',
     image: convertIpfsToGateway(uploadStatus.split('IPFS Hash - ')[1]),
     attributes: [
       {
@@ -142,56 +143,56 @@ export default function KYCsuccessPage() {
   } : null;
 
   return (
-    <div className="p-8 bg-gray-800 min-h-screen text-white">
-      <h1 className="text-3xl font-bold mb-6">KYC Verification Details</h1>
-      {data && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold">Bride's Information</h2>
-          <p>Name: {data.bride.full_name}</p>
-          <p>NID: {data.bride.nid}</p>
+    <div className="p-8 bg-slate-900 min-h-screen text-white">
+      <AuroraBackground>
+        <h1 className="text-3xl font-bold mb-6">KYC Verification Details</h1>
+        {data && (
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold">Bride's Information</h2>
+            <p>Name: {data.bride.full_name}</p>
+            <p>NID: {data.bride.nid}</p>
 
-          <h2 className="text-2xl font-semibold mt-6">Groom's Information</h2>
-          <p>Name: {data.groom.full_name}</p>
-          <p>NID: {data.groom.nid}</p>
-        </div>
-      )}
-
-      {/* Hidden canvas element for drawing the image */}
-      <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
-
-      {/* Image preview */}
-      {imageURL && (
-        <div className="mb-8">
-          <h2 className="text-2xl font-semibold mb-2">Generated KYC Verification Image</h2>
-          <img src={imageURL} alt="Generated KYC Verification" className="w-96 h-auto rounded-lg border-2 border-gray-500" />
-        </div>
-      )}
-
-      {/* Upload image to Pinata */}
-      {imageURL && <UploadImage imageURL={imageURL} filename={filename} />}
-
-      {/* Conditionally render Cnft only when metadata is available */}
-      {metadata && (
-        <div className="mt-8">
-          <Cnft imageURL={metadata.image} metadata={metadata} />
-
-          {/* Display metadata */}
-          <div className="mt-4">
-            <h2 className="text-2xl font-semibold">NFT Metadata</h2>
-            <pre className="bg-gray-700 p-4 rounded-lg mt-2">{JSON.stringify(metadata, null, 2)}</pre>
+            <h2 className="text-2xl font-semibold mt-6">Groom's Information</h2>
+            <p>Name: {data.groom.full_name}</p>
+            <p>NID: {data.groom.nid}</p>
           </div>
-        </div>
-      )}
+        )}
+        {/* Eligibility Status */}
+        {isEligible !== null && (
+          <div className="mt-8">
+            <h2 className="text-2xl font-semibold">Eligibility Status</h2>
+            <p className={`mt-2 ${isEligible ? 'text-green-400' : 'text-red-400'}`}>
+              {isEligible ? "Eligible" : "Not Eligible"}
+            </p>
+          </div>
+        )}
+        {/* Hidden canvas element for drawing the image */}
+        <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
 
-      {/* Eligibility Status */}
-      {isEligible !== null && (
-        <div className="mt-8">
-          <h2 className="text-2xl font-semibold">Eligibility Status</h2>
-          <p className={`mt-2 ${isEligible ? 'text-green-400' : 'text-red-400'}`}>
-            {isEligible ? "Eligible" : "Not Eligible"}
-          </p>
-        </div>
-      )}
+        {/* Image preview */}
+        {imageURL && (
+          <div className="mb-8">
+            <h2 className="text-2xl font-semibold mb-2">Generated KYC Verification Image</h2>
+            <img src={imageURL} alt="Generated KYC Verification" className="w-96 h-auto rounded-lg border-2 border-gray-500" />
+          </div>
+        )}
+
+        {/* Upload image to Pinata */}
+        {imageURL && <UploadImage imageURL={imageURL} filename={filename} />}
+
+        {/* Conditionally render Cnft only when metadata is available */}
+        {metadata && (
+          <div className="mt-8">
+            <Cnft imageURL={metadata.image} metadata={metadata} />
+
+            {/* Display metadata */}
+            <div className="mt-4">
+              <h2 className="text-2xl font-semibold">NFT Metadata</h2>
+              <pre className="bg-gray-700 p-4 rounded-lg mt-2">{JSON.stringify(metadata, null, 2)}</pre>
+            </div>
+          </div>
+        )}
+      </AuroraBackground>
     </div>
   );
 }

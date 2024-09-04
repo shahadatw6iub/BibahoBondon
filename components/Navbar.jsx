@@ -8,7 +8,7 @@ const links = [
 
 const Navbar = () => {
   return (
-    <nav className="p-4 flex justify-between items-center bg-slate-900">
+    <nav className="p-4 flex justify-between items-center bg-slate-500">
       <a href="/">
         <div className="relative">
           <img

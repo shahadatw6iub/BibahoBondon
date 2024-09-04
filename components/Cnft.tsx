@@ -42,7 +42,7 @@ const Cnft: React.FC<CnftProps> = ({ imageURL, metadata }) => {
                 },
                 body: JSON.stringify({
                     jsonrpc: '2.0',
-                    id: 'your-project-id',
+                    id: 'bibahonft',
                     method: 'mintCompressedNft',
                     params: {
                         name: metadata.name,
@@ -82,7 +82,7 @@ const Cnft: React.FC<CnftProps> = ({ imageURL, metadata }) => {
                 },
                 body: JSON.stringify({
                     jsonrpc: '2.0',
-                    id: 'your-project-id',
+                    id: 'bibahonft',
                     method: 'getAsset',
                     params: {
                         id: assetId,

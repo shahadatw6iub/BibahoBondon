@@ -8,8 +8,6 @@ import WhyChooseUs from '../components/bibaho-bondhon/WhyChooseUs';
 
 const Index = () => {
 
-    const [displayRequirements, setDisplayRequirements] = React.useState(false);
-
     return (
     <main className='bg-slate-900' >
       <HeroSection />
