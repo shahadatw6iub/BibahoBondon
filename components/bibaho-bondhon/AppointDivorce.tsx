@@ -52,7 +52,7 @@ function Appointmarriage() {
     };
 
     try {
-      const response = await fetch("http://localhost:3001/saveDAppointment", {
+      const response = await fetch("/api/saveAppointment", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

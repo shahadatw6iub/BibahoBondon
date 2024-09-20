@@ -84,7 +84,7 @@ function Appointmarriage() {
   };
 
   return (
-    <main className="relative flex flex-col w-full h-full items-center justify-center bg-zinc-50 dark:bg-zinc-900 text-slate-950 transition-bg">
+    <main className="relative flex flex-col w-full h-full items-center justify-center bg-slate-900 dark:bg-zinc-900 text-slate-950 transition-bg">
       <div className="relative items-center justify-center z-15 text-lg lg:text-4xl md:text-2xl sm:text-lg bg-clip-text text-transparent bg-gradient-to-b from-neutral-200 to-neutral-600 font-sans font-bold mt-6">
         How do you register your marriage, You ask?
       </div>
@@ -147,7 +147,7 @@ function Appointmarriage() {
         </div>
         <div className="flex flex-col gap-4 mb-4">
           <Combobox
-            className="w-full p-4 rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 bg-neutral-800 placeholder:text-neutral-700 text-white"
+            className="w-full p-4 rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 bg-neutral-800 placeholder:text-black text-black"
             color="dark"
             mode="tight"
             placeholder="Select a country..."
@@ -175,7 +175,7 @@ function Appointmarriage() {
         {selectedCountry && (
           <div className="flex flex-col gap-4 mb-4">
             <Combobox
-              className="w-full p-4 rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 bg-neutral-800 placeholder:text-neutral-700 text-white"
+              className="w-full p-4 rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 bg-neutral-800 placeholder:text-neutral-700 text-black"
               color="dark"
               mode="tight"
               placeholder="Select a city..."
@@ -204,7 +204,7 @@ function Appointmarriage() {
         {selectedCity && (
           <div className="flex flex-col gap-4 mb-4">
             <Combobox
-              className="w-full p-4 rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 bg-neutral-800 placeholder:text-neutral-700 text-white"
+              className="w-full p-4 rounded-lg border border-neutral-800 focus:ring-2 focus:ring-teal-500 bg-neutral-800 placeholder:text-neutral-700 text-black"
               color="dark"
               mode="tight"
               placeholder="Select a registration office..."

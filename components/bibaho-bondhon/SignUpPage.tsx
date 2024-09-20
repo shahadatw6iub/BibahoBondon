@@ -39,14 +39,27 @@ function SignUpPage() {
       setKycVerified(true);
       setKycMessage("KYC Verified!");
 
+      // Map the properties to match the NidEntry type
+      const brideEntry: NidEntry = {
+        nid: foundBrideNid.nid,
+        name: foundBrideNid.full_name,  // Mapping full_name to name
+        dob: foundBrideNid.date_of_birth,  // Mapping date_of_birth to dob
+      };
+
+      const groomEntry: NidEntry = {
+        nid: foundGroomNid.nid,
+        name: foundGroomNid.full_name,
+        dob: foundGroomNid.date_of_birth,
+      };
+
       // Set the full entry objects in state
-      setBrideEntry(foundBrideNid);
-      setGroomEntry(foundGroomNid);
+      setBrideEntry(brideEntry);
+      setGroomEntry(groomEntry);
 
       // Prepare data to be sent
       const entry = {
-        bride: foundBrideNid,
-        groom: foundGroomNid,
+        bride: brideEntry,
+        groom: groomEntry,
       };
 
       // POST data to API route
@@ -66,6 +79,7 @@ function SignUpPage() {
       setKycMessage("KYC Verification Failed.");
     }
   };
+
 
   return (
     <main>

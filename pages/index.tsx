@@ -9,7 +9,7 @@ import WhyChooseUs from '../components/bibaho-bondhon/WhyChooseUs';
 const Index = () => {
 
     return (
-    <main className='bg-slate-900' >
+    <main className='text-white' >
       <HeroSection />
       <Services />
       <WhyChooseUs />

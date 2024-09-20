@@ -4,7 +4,6 @@ import { AuroraBackground } from "../ui/aurora-background";
 import Loader from "./Loader";
 import Link from "next/link";
 import BottomGradient from "../ui/bottomGradient";
-import Walletheader from "./Walletheader";
 
 interface Appointment {
   id: number;

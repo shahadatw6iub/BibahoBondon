@@ -47,7 +47,7 @@ const Cnft: React.FC<CnftProps> = ({ imageURL, metadata }) => {
                     params: {
                         name: metadata.name,
                         symbol: metadata.symbol,
-                        owner: publicKey.toString(),
+                        owner: publicKey,
                         description: metadata.description,
                         attributes: metadata.attributes,
                         imageUrl: imageURL, // Use the IPFS gateway URL
@@ -112,6 +112,7 @@ const Cnft: React.FC<CnftProps> = ({ imageURL, metadata }) => {
             href: `https://xray.helius.xyz/token/${nft}?network=devnet`,
         },
     ];
+    console.log(outputs)
 
     React.useEffect(() => {
         setApiUrl("https://devnet.helius-rpc.com/?api-key=593e81f4-0166-4d2f-b9b2-bb891cfbeff0");

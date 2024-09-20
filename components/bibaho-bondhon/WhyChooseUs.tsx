@@ -2,7 +2,7 @@
 import React from "react";
 import { StickyScroll } from "../ui/sticky-scroll-reveal";
 import Image from "next/image";
-import { WhyChooseUsItem } from "../../types.d";
+import { WhyChooseUsItem } from "../../types";
 import WhyChooseUsData from "../../data/whychooseusdata.json";
 
 const content = WhyChooseUsData.map((item: WhyChooseUsItem, index: number) => ({

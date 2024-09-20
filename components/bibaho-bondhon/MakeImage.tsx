@@ -132,7 +132,7 @@ export default function KYCsuccessPage({ entry }: { entry: any }) {
                     {imageURL && <UploadImage imageURL={imageURL} filename={filename} />}
 
                     {/* Additional component to handle image link and metadata */}
-                    <AdditionalComponent imageURL={imageURL} metadata={metadata} />
+                    {/* <AdditionalComponent imageURL={imageURL} metadata={metadata} /> */}
                 </div>
             )}
 

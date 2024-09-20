@@ -15,7 +15,7 @@ export const AuroraBackground = ({
   return (
     <main className="w-full h-full min-h-screen flex relative flex flex-col w-full h-full items-center justify-center bg-slate-900 dark:bg-slate-900 text-slate-950 transition-bg">
       <div
-        className={`relative flex flex-col w-full h-full items-center justify-center bg-slate-900 dark:bg-slate-900 text-slate-950 transition-bg ${className || ""}`}
+        className={`relative flex flex-col h-full items-center justify-center bg-slate-900 dark:bg-slate-900 text-white transition-bg ${className || ""}`}
         {...props}
       >
         {children}

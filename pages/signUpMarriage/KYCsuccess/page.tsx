@@ -6,6 +6,7 @@ import UploadImage from "../../../components/Upload_Image";
 import { useUpload } from '../../../contexts/UploadContext';
 import Cnft from "../../../components/Cnft";
 import { AuroraBackground } from "../../../components/ui/aurora-background";
+import Footer from "../../../components/bibaho-bondhon/Footer";
 
 function calculateAge(dob: string) {
   const birthDate = new Date(dob);
@@ -53,11 +54,15 @@ export default function KYCsuccessPage() {
       const age2 = dob2 ? calculateAge(dob2) : null;
 
       if (age1 !== null && age2 !== null) {
-        setIsEligible(age1 > 18 && age2 > 21);
-      }
+        const eligibility = age1 > 18 && age2 > 21;
+        setIsEligible(eligibility);
 
-      generateImage(data);
-      generateFilename(data);
+        // Only generate the image and filename if eligible
+        if (eligibility) {
+          generateImage(data);
+          generateFilename(data);
+        }
+      }
     }
   }, [data]);
 
@@ -114,7 +119,7 @@ export default function KYCsuccessPage() {
     return ipfsUrl;
   };
 
-  const metadata = uploadStatus.includes('IPFS Hash - ') ? {
+  const metadata = uploadStatus.includes('IPFS Hash - ') && isEligible ? {
     name: `${data?.bride?.full_name}_and_${data?.groom?.full_name}`,
     symbol: 'MARRIAGE',
     description: 'NFT representing the contract details for a marriage.',
@@ -122,11 +127,23 @@ export default function KYCsuccessPage() {
     attributes: [
       {
         trait_type: "Bride's Name",
-        value: data?.bride?.full_name || ""
+        value: data?.bride?.full_name || "",
       },
       {
         trait_type: "Groom's Name",
         value: data?.groom?.full_name || ""
+      },
+      {
+        trait_type: "Bride's NID",
+        value: data?.bride?.nid || "",
+      },
+      {
+        trait_type: "Groom's NID",
+        value: data?.groom?.nid || ""
+      },
+      {
+        trait_type: "Date",
+        value: new Date().toString() || ""
       },
       // Add more attributes as needed
     ],
@@ -143,7 +160,7 @@ export default function KYCsuccessPage() {
   } : null;
 
   return (
-    <div className="p-8 bg-slate-900 min-h-screen text-white">
+    <div className="bg-slate-900 min-h-screen text-white">
       <AuroraBackground>
         <h1 className="text-3xl font-bold mb-6">KYC Verification Details</h1>
         {data && (
@@ -166,19 +183,24 @@ export default function KYCsuccessPage() {
             </p>
           </div>
         )}
+
         {/* Hidden canvas element for drawing the image */}
-        <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
+        {isEligible && (
+          <>
+            <canvas ref={canvasRef} style={{ display: "none" }}></canvas>
 
-        {/* Image preview */}
-        {imageURL && (
-          <div className="mb-8">
-            <h2 className="text-2xl font-semibold mb-2">Generated KYC Verification Image</h2>
-            <img src={imageURL} alt="Generated KYC Verification" className="w-96 h-auto rounded-lg border-2 border-gray-500" />
-          </div>
+            {/* Image preview */}
+            {imageURL && (
+              <div className="mb-8">
+                <h2 className="text-2xl font-semibold mb-2">Generated KYC Verification Image</h2>
+                <img src={imageURL} alt="Generated KYC Verification" className="w-96 h-auto rounded-lg border-2 border-gray-500" />
+              </div>
+            )}
+
+            {/* Upload image to Pinata */}
+            {imageURL && <UploadImage imageURL={imageURL} filename={filename} />}
+          </>
         )}
-
-        {/* Upload image to Pinata */}
-        {imageURL && <UploadImage imageURL={imageURL} filename={filename} />}
 
         {/* Conditionally render Cnft only when metadata is available */}
         {metadata && (
@@ -192,7 +214,9 @@ export default function KYCsuccessPage() {
             </div>
           </div>
         )}
+
       </AuroraBackground>
+      <Footer />
     </div>
   );
 }
