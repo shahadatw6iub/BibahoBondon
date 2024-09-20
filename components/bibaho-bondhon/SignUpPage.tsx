@@ -10,10 +10,24 @@ import Link from "next/link";
 
 interface NidEntry {
   nid: string;
-  name: string;
-  dob: string;
-  [key: string]: any;
+  full_name: string;
+  father_name: string;
+  mother_name: string;
+  date_of_birth: string;
+  gender: string;
+  blood_group: string;
+  address: {
+    village_or_road: string;
+    post_office: string;
+    upazila: string;
+    district: string;
+    division: string;
+  };
+  issue_date: string;
+  expiry_date: string;
+  fingerprintHash: string;
 }
+
 
 function SignUpPage() {
   const [brideNid, setBrideNid] = useState("");
@@ -39,27 +53,14 @@ function SignUpPage() {
       setKycVerified(true);
       setKycMessage("KYC Verified!");
 
-      // Map the properties to match the NidEntry type
-      const brideEntry: NidEntry = {
-        nid: foundBrideNid.nid,
-        name: foundBrideNid.full_name,  // Mapping full_name to name
-        dob: foundBrideNid.date_of_birth,  // Mapping date_of_birth to dob
-      };
-
-      const groomEntry: NidEntry = {
-        nid: foundGroomNid.nid,
-        name: foundGroomNid.full_name,
-        dob: foundGroomNid.date_of_birth,
-      };
-
       // Set the full entry objects in state
-      setBrideEntry(brideEntry);
-      setGroomEntry(groomEntry);
+      setBrideEntry(foundBrideNid);
+      setGroomEntry(foundGroomNid);
 
       // Prepare data to be sent
       const entry = {
-        bride: brideEntry,
-        groom: groomEntry,
+        bride: foundBrideNid,
+        groom: foundGroomNid,
       };
 
       // POST data to API route
@@ -79,7 +80,6 @@ function SignUpPage() {
       setKycMessage("KYC Verification Failed.");
     }
   };
-
 
   return (
     <main>
